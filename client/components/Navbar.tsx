@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { Logo } from './logo'
+import { Logo, LogoIcon } from './logo'
 import { Button } from './ui/button'
 function Navbar() {
     const [menuState, setMenuState] = React.useState(false)
@@ -24,7 +24,7 @@ function Navbar() {
                                     href="/"
                                     aria-label="home"
                                     className="flex items-center space-x-2">
-                                    <Logo />
+                                    <LogoIcon />
                                 </Link>
 
                                 <button
