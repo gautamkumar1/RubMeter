@@ -1,18 +1,9 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
-import { Logo, LogoIcon } from './logo'
 import { Button } from './ui/button'
 import Image from "next/image"
 function Navbar() {
-    const [menuState, setMenuState] = React.useState(false)
-    const menuItems = [
-        { name: 'Features', href: '#' },
-        { name: 'Solution', href: '#' },
-        { name: 'Pricing', href: '#' },
-        { name: 'About', href: '#' },
-    ]
   return (
     <div>
     <div className="flex items-center justify-between px-6 py-4 backdrop-blur-xl bg-black/50">
@@ -25,28 +16,26 @@ function Navbar() {
               height={32}
               className="w-8 h-8"
             />
-            <span className="font-medium text-white">Crop Studio</span>
+            <span className="font-medium text-white">RubMeter</span>
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-8">
           <Link href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-            Products
+          Home 
           </Link>
           <Link href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-            Help
+            Features
           </Link>
           <Link href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-            Community
+            Why Track?
           </Link>
           <Link href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-            Pricing
+            About
           </Link>
-          <Link href="#" className="text-sm text-gray-300 hover:text-white transition-colors">
-            Contact
-          </Link>
+         
         </nav>
-        <Button variant="secondary" className="bg-white text-black hover:bg-gray-100">
-          Download
+        <Button variant="outline" className="border-zinc-700 hover:bg-zinc-800">
+              Join Waitlist
         </Button>
       </div>
     </div>
