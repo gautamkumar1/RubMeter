@@ -6,12 +6,13 @@ import Image from "next/image"
 function Navbar() {
   return (
     <div>
+    <nav className='fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent'>
     <div className="flex items-center justify-between px-6 py-4 backdrop-blur-xl bg-black/50">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-kn1C5CDk5zUaYa4BHkG1FKUQupEsrm.png"
-              alt="Crop Studio"
+              src="/image/logo.png"
+              alt="RubMeter Logo"
               width={32}
               height={32}
               className="w-8 h-8"
@@ -38,6 +39,7 @@ function Navbar() {
               Join Waitlist
         </Button>
       </div>
+    </nav>
     </div>
   )
 }
