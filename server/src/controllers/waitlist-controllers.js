@@ -1,19 +1,13 @@
-import { prisma } from "../database/db.config.js";
+import Waitlist from "../models/waitlist-model.js";
 
 const createWaitlist = async (req, res) => {
     try {
         const {email} = req.body;
-        const isAlreadyInWaitlist = await prisma.waitlist.findUnique({
-            where:{email: email}
-        })
+        const isAlreadyInWaitlist = await Waitlist.findOne({email: email})
         if (isAlreadyInWaitlist){
             return res.status(400).json({message: "You are already in the waitlist"})
         }
-        await prisma.waitlist.create({
-            data: {
-                email: email
-            }
-        })
+        await Waitlist.create({email: email})
         return res.status(201).json({message: "You have been added to the waitlist"})
     } catch (error) {
         console.log(error);
