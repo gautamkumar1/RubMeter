@@ -5,43 +5,34 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CheckCircle2, Loader2 } from "lucide-react"
+import { useMutation } from "@tanstack/react-query"
+import { createWaitlist } from "@/apis/apis"
+import { toast } from "sonner"
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
-
+  const mutation = useMutation({
+    mutationFn: createWaitlist,
+    onSuccess: (data: any) =>{
+      toast.success(data.message)
+    },
+    onError: (error: any) => {
+      setError(error.response.data.message)
+      toast.error(error.response.data.message)
+    },
+  })
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!email) {
-      setError("Please enter your email")
-      return
-    }
-
-    setLoading(true)
-    setError("")
-
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false)
-      setSubmitted(true)
-    }, 1500)
+    mutation.mutate({ email })
   }
 
-  if (submitted) {
-    return (
-      <div className="flex items-center justify-center gap-2 text-emerald-400">
-        <CheckCircle2 className="h-5 w-5" />
-        <span>Thank you! We'll notify you when we launch.</span>
-      </div>
-    )
-  }
 
   return (
     <form onSubmit={handleSubmit} className="w-full space-y-4">
-      {error && <p className="text-red-400 text-sm">{error}</p>}
+      {mutation.isError && <p className="text-red-400 text-sm">{error}</p>}
 
       <div className="flex w-full max-w-md mx-auto gap-2">
         <Input
@@ -55,9 +46,9 @@ export default function WaitlistForm() {
         <Button
           type="submit"
           className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600"
-          disabled={loading}
+          disabled={mutation.isPending}
         >
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Notify Me"}
+          {mutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Notify Me"}
         </Button>
       </div>
     </form>
